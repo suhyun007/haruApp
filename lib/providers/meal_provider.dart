@@ -18,9 +18,11 @@ class MealProvider with ChangeNotifier {
     notifyListeners();
 
     try {
-      _meals = await ApiService.getMeals(userId, date);
+      final mealsData = await ApiService.getMeals(userId, date);
+      _meals = mealsData.map((json) => MealModel.fromJson(json)).toList();
     } catch (e) {
       debugPrint('Error loading meals: $e');
+      _meals = [];
     }
 
     _isLoading = false;

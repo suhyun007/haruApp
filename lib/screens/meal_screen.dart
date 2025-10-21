@@ -83,7 +83,7 @@ class _MealScreenState extends State<MealScreen> {
           ElevatedButton(
             onPressed: _submitMeal,
             style: ElevatedButton.styleFrom(
-              backgroundColor: const Color(0xFFE6C767),
+              backgroundColor: const Color(0xFF3DDC97),
             ),
             child: const Text('추가'),
           ),
@@ -138,8 +138,9 @@ class _MealScreenState extends State<MealScreen> {
                       ),
                       const SizedBox(height: 16),
                       Text(
-                        '기록된 식사가 없습니다',
-                        style: TextStyle(fontSize: 18, color: Colors.grey[600]),
+                        '(작업진행중)\n기록된 식사가 없습니다',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(fontSize: 18, color: Color(0xFF555555)),
                       ),
                     ],
                   ),
@@ -157,8 +158,9 @@ class _MealScreenState extends State<MealScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: _showAddMealDialog,
-        backgroundColor: const Color(0xFFE6C767),
-        child: const Icon(Icons.add),
+        backgroundColor: const Color(0xFF3DDC97),
+        mini: true,
+        child: const Icon(Icons.add, color: Colors.white, size: 20),
       ),
     );
   }
@@ -185,7 +187,7 @@ class _MealScreenState extends State<MealScreen> {
                 style: const TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
-                  color: Color(0xFFD4AF37),
+                  color: Color(0xFFE7FBEC),
                 ),
               ),
             ],

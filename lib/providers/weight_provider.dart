@@ -14,9 +14,11 @@ class WeightProvider with ChangeNotifier {
     notifyListeners();
 
     try {
-      _weights = await ApiService.getWeights(userId);
+      final weightsData = await ApiService.getWeights(userId);
+      _weights = weightsData.map((json) => WeightModel.fromJson(json)).toList();
     } catch (e) {
       debugPrint('Error loading weights: $e');
+      _weights = [];
     }
 
     _isLoading = false;

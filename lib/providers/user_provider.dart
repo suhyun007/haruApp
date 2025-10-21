@@ -14,7 +14,10 @@ class UserProvider with ChangeNotifier {
     notifyListeners();
 
     try {
-      _user = await ApiService.getUser(userId);
+      final userData = await ApiService.getUser(userId);
+      if (userData != null) {
+        _user = UserModel.fromJson(userData);
+      }
     } catch (e) {
       debugPrint('Error loading user: $e');
     }
@@ -35,6 +38,38 @@ class UserProvider with ChangeNotifier {
     }
 
     _isLoading = false;
+    notifyListeners();
+  }
+
+  void createUser({
+    required String id,
+    required String name,
+    required int age,
+    required double height,
+    required double currentWeight,
+    required double targetWeight,
+    required int dailyCalorieGoal,
+    required String gender,
+    String? dietMethodName,
+    String? dietMethodDescription,
+  }) {
+    _user = UserModel(
+      id: id,
+      name: name,
+      age: age,
+      height: height,
+      currentWeight: currentWeight,
+      targetWeight: targetWeight,
+      dailyCalorieGoal: dailyCalorieGoal,
+      gender: gender,
+      dietMethodName: dietMethodName,
+      dietMethodDescription: dietMethodDescription,
+    );
+    notifyListeners();
+  }
+
+  void setUser(UserModel user) {
+    _user = user;
     notifyListeners();
   }
 }
